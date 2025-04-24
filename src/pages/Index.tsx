@@ -19,9 +19,10 @@ const Index: React.FC = () => {
         
         <div className="mb-6">
           <SearchBox />
-          <div className="mt-2 text-xs text-gray-500 text-center">
-            Showing default location (Nairobi). Allow location access for precise readings.
-          </div>
+        </div>
+        
+        <div className="mb-4">
+          <UnitToggle />
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
@@ -30,7 +31,6 @@ const Index: React.FC = () => {
           </div>
           
           <div className="lg:col-span-2">
-            <UnitToggle />
             <ForecastSection />
           </div>
         </div>

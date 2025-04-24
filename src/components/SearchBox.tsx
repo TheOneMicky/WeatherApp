@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import { Search } from "lucide-react";
 import { countries } from "@/data/countries";
@@ -6,10 +5,9 @@ import { useWeather } from "@/context/WeatherContext";
 import { getTranslation } from "@/utils/translations";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { GeoLocation } from "@/types/weather";
 
 const SearchBox: React.FC = () => {
-  const { searchLocation, language, setSelectedLocation } = useWeather();
+  const { searchLocation, language, setSelectedLocation, location } = useWeather();
   const [searchTerm, setSearchTerm] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [activeCountry, setActiveCountry] = useState<string | null>(null);
@@ -75,6 +73,12 @@ const SearchBox: React.FC = () => {
           {getTranslation("search_button", language)}
         </Button>
       </form>
+
+      {location?.name === "Nairobi" && (
+        <div className="mt-2 text-xs text-gray-500 text-center">
+          {getTranslation("allow_location", language)}
+        </div>
+      )}
 
       {isDropdownOpen && (
         <div 
