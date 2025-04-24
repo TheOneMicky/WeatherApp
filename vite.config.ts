@@ -5,7 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/weather-app/", // Add this line - replace 'weather-app' with your repo name
+  base: "/WeatherApp/",
   server: {
     host: "::",
     port: 8080,
