@@ -1,14 +1,54 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React from "react";
+import { WeatherProvider } from "@/context/WeatherContext";
+import Header from "@/components/Header";
+import SearchBox from "@/components/SearchBox";
+import CurrentWeather from "@/components/CurrentWeather";
+import ForecastSection from "@/components/ForecastSection";
+import WeatherDetails from "@/components/WeatherDetails";
+import UnitToggle from "@/components/UnitToggle";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import ErrorToast from "@/components/ErrorToast";
+
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <WeatherProvider>
+      <div className="min-h-screen max-w-5xl mx-auto px-4 py-6">
+        <ErrorToast />
+        <Header />
+        
+        <div className="mb-6">
+          <SearchBox />
+          <div className="mt-2 text-xs text-gray-500 text-center">
+            Showing default location (Nairobi). Allow location access for precise readings.
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+          <div className="lg:col-span-1">
+            <CurrentWeather />
+          </div>
+          
+          <div className="lg:col-span-2">
+            <UnitToggle />
+            <ForecastSection />
+          </div>
+        </div>
+        
+        <WeatherDetails />
+        
+        <WeatherLoader />
       </div>
-    </div>
+    </WeatherProvider>
   );
+};
+
+// This component conditionally renders the loading spinner
+const WeatherLoader: React.FC = () => {
+  const { loading } = React.useContext(require("@/context/WeatherContext").WeatherContext);
+  
+  if (!loading) return null;
+  return <LoadingSpinner />;
 };
 
 export default Index;
