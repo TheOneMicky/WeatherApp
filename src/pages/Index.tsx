@@ -1,6 +1,6 @@
 
 import React from "react";
-import { WeatherProvider } from "@/context/WeatherContext";
+import { WeatherProvider, useWeather } from "@/context/WeatherContext";
 import Header from "@/components/Header";
 import SearchBox from "@/components/SearchBox";
 import CurrentWeather from "@/components/CurrentWeather";
@@ -45,7 +45,7 @@ const Index: React.FC = () => {
 
 // This component conditionally renders the loading spinner
 const WeatherLoader: React.FC = () => {
-  const { loading } = React.useContext(require("@/context/WeatherContext").WeatherContext);
+  const { loading } = useWeather();
   
   if (!loading) return null;
   return <LoadingSpinner />;
