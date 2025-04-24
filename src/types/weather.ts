@@ -115,11 +115,16 @@ export interface Country {
 }
 
 export type TemperatureUnit = "celsius" | "fahrenheit";
-export type Language = "en" | "sw";
+export type Language = "en" | "sw" | "es" | "fr" | "ar" | "zh" | "hi";
 
 export interface WeatherTranslations {
   [key: string]: {
     en: string;
     sw: string;
+    es: string;
+    fr: string;
+    ar: string;
+    zh: string;
+    hi: string;
   };
 }

@@ -114,7 +114,7 @@ export const translations: WeatherTranslations = {
     "sw": "Kiswahili",
     "es": "Sudán",
     "fr": "Sénégal",
-    "ar": "السندان",
+    "ar": "السن��ان",
     "zh": "斯瓦希里语",
     "hi": "स्वाहिली"
   },

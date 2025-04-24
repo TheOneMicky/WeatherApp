@@ -1,13 +1,13 @@
 
 import React from "react";
-import { ForecastItem } from "@/types/weather";
+import { ForecastItem, Language } from "@/types/weather";
 import { formatTemperature, formatDay, getTranslation } from "@/utils/translations";
 import { getWeatherIcon } from "@/utils/weatherIcons";
 
 interface ForecastCardProps {
   forecast: ForecastItem;
   temperatureUnit: "celsius" | "fahrenheit";
-  language: "en" | "sw";
+  language: Language;
 }
 
 const ForecastCard: React.FC<ForecastCardProps> = ({ 

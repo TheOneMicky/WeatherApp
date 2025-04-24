@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { TemperatureUnit, Language, WeatherData, ForecastData, GeoLocation } from "@/types/weather";
 
@@ -38,10 +37,8 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [error, setError] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
-  // API Key
   const API_KEY = "31d920d091ee7887541f558b3a5dc51a";
 
-  // Initialize with default location on mount
   useEffect(() => {
     const savedLocation = localStorage.getItem("weatherLocation");
     const savedUnit = localStorage.getItem("temperatureUnit") as TemperatureUnit;
@@ -57,7 +54,6 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
         document.documentElement.classList.remove("dark");
       }
     } else {
-      // Check system preference
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
       setDarkMode(prefersDark);
       if (prefersDark) {
@@ -89,7 +85,6 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
     setError(null);
     
     try {
-      // Fetch current weather
       const weatherResponse = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${loc.lat}&lon=${loc.lon}&appid=${API_KEY}&units=metric`
       );
@@ -101,7 +96,6 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
       const weatherData = await weatherResponse.json();
       setCurrentWeather(weatherData);
       
-      // Fetch forecast
       const forecastResponse = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${loc.lat}&lon=${loc.lon}&appid=${API_KEY}&units=metric`
       );
@@ -140,12 +134,10 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return;
       }
       
-      // Use the first result
       const newLocation = data[0];
       setLocation(newLocation);
       localStorage.setItem("weatherLocation", JSON.stringify(newLocation));
       
-      // Fetch weather for the new location
       await fetchWeatherData(newLocation);
     } catch (err) {
       console.error("Error searching location:", err);
@@ -168,7 +160,10 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const toggleLanguage = () => {
-    const newLanguage = language === "en" ? "sw" : "en";
+    const languages: Language[] = ["en", "sw", "es", "fr", "ar", "zh", "hi"];
+    const currentIndex = languages.indexOf(language as Language);
+    const nextIndex = (currentIndex + 1) % languages.length;
+    const newLanguage = languages[nextIndex];
     setLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
   };
@@ -193,7 +188,6 @@ export const WeatherProvider: React.FC<{ children: React.ReactNode }> = ({ child
           const { latitude, longitude } = position.coords;
           
           try {
-            // Reverse geocoding to get location name
             const response = await fetch(
               `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
             );

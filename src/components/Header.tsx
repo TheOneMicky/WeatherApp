@@ -9,6 +9,17 @@ import { Toggle } from "@/components/ui/toggle";
 const Header: React.FC = () => {
   const { toggleLanguage, toggleDarkMode, language, darkMode, useCurrentLocation } = useWeather();
 
+  // Language display mapping
+  const languageDisplay: Record<string, string> = {
+    en: "EN",
+    sw: "SW",
+    es: "ES",
+    fr: "FR",
+    ar: "AR",
+    zh: "ZH",
+    hi: "HI"
+  };
+
   return (
     <header className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
       <h1 className="text-2xl font-bold">Weather App</h1>
@@ -25,10 +36,10 @@ const Header: React.FC = () => {
         
         <Toggle
           aria-label="Toggle language"
-          pressed={language === "sw"}
+          pressed={language !== "en"}
           onPressedChange={toggleLanguage}
         >
-          {language === "en" ? "EN" : "SW"}
+          {languageDisplay[language]}
         </Toggle>
         
         <Toggle
